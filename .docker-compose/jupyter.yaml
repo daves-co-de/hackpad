@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+
+  jupyter:
+    image: ${IMAGE_TAG}
+    user: "${UID}:${GID}"
+    container_name: ${PROJECT_NAME}-jupyter
+    environment:
+      - NB_UID=${UID} 
+      - NB_GID=${GID}
+    entrypoint: start-notebook.sh --NotebookApp.token='' 
+    volumes:
+      - ../notebooks/data:/home/jovyan/data
+      - ../notebooks/work:/home/jovyan/work
+    working_dir: /home/jovyan/work
